@@ -1,0 +1,35 @@
+.spinner-border-sm {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.3rem solid rgba(#979fd0, 0.3);
+  border-top-color: #979fd0;
+  border-radius: 50%;
+  animation: 1.5s spin infinite linear;
+}
+
+.spinner-border-md {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border: 0.3rem solid rgba(#979fd0, 0.3);
+  border-top-color: #979fd0;
+  border-radius: 50%;
+  animation: 1.5s spin infinite linear;
+}
+
+.spinner-border-lg {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.3rem solid rgba(#979fd0, 0.3);
+  border-top-color: #979fd0;
+  border-radius: 50%;
+  animation: 1.5s spin infinite linear;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

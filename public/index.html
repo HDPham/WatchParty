@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A simple website to watch videos with friends"
+    />
+    <meta name="author" content="Hung Pham" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-center">
+        <h1 class="title text-xl"><%= htmlWebpackPlugin.options.title %></h1>
+        <div class="room-id-wrapper text-xl" hidden>
+          Code: <span class="room-id"></span>
+        </div>
+        <div class="copy-container" hidden>
+          <button
+            class="copy-btn"
+            aria-label="Copy room code"
+            aria-describedby="copy-tooltip"
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <title>Copy</title>
+              <path
+                d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <div
+            id="copy-tooltip"
+            class="tooltip"
+            role="tooltip"
+            aria-hidden="true"
+          >
+            Copied
+          </div>
+        </div>
+      </div>
+
+      <div class="header-left">
+        <a class="leave-btn" href="/">Leave</a>
+      </div>
+
+      <div class="header-right">
+        <div>
+          <ul>
+            <li>
+              <a
+                class="github-link social-link"
+                href="https://github.com/HDPham/watchparty"
+                rel="noreferrer noopener"
+                target="_blank"
+                aria-label="Github"
+              >
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 496 512"
+                >
+                  <title>Github</title>
+                  <path
+                    d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <button
+          class="theme-toggler"
+          aria-label="Toggle dark mode"
+          aria-pressed="false"
+        >
+          <span class="ball preload"></span>
+          <svg
+            class="moon"
+            aria-hidden="true"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"
+              fill="currentColor"
+            />
+          </svg>
+          <svg
+            class="sun"
+            aria-hidden="true"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+          >
+            <path
+              d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class="home page-content" data-pathname="/">
+        <section class="enter-room rounded">
+          <h2 class="sr-only">Enter Room</h2>
+          <ul class="tab-list" role="tablist">
+            <li role="presentation">
+              <button
+                class="tab-button rounded-top active"
+                id="tab-create"
+                data-target="#create-room"
+                role="tab"
+                aria-selected="true"
+              >
+                Create Room
+              </button>
+            </li>
+            <li role="presentation">
+              <button
+                class="tab-button rounded-top"
+                id="tab-join"
+                data-target="#join-room"
+                role="tab"
+                aria-selected="false"
+              >
+                Join Room
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div
+              class="tab-pane active"
+              id="create-room"
+              role="tabpanel"
+              aria-labelledby="tab-create"
+            >
+              <form name="create">
+                <h3 class="sr-only">Create Room</h3>
+                <div class="form-group">
+                  <label class="text-sm" for="create-username">Nickname</label>
+                  <input
+                    class="form-control rounded"
+                    id="create-username"
+                    name="username"
+                    type="text"
+                    placeholder="Enter your nickname"
+                    maxlength="20"
+                    required
+                  />
+                </div>
+                <div class="form-submit-container">
+                  <button class="create-room-btn btn">Create</button>
+                </div>
+              </form>
+            </div>
+
+            <div
+              class="tab-pane"
+              id="join-room"
+              role="tabpanel"
+              aria-labelledby="tab-join"
+            >
+              <form name="join">
+                <h3 class="sr-only">Join Room</h3>
+                <div class="form-group">
+                  <label class="text-sm" for="join-username">Nickname</label>
+                  <input
+                    class="form-control rounded"
+                    id="join-username"
+                    name="username"
+                    type="text"
+                    placeholder="Enter your nickname"
+                    maxlength="20"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="text-sm" for="join-room-code">Room Code</label>
+                  <input
+                    class="form-control rounded"
+                    id="join-room-code"
+                    name="room_id"
+                    type="text"
+                    placeholder="Enter room code"
+                    pattern="[0-9a-zA-Z]{6}"
+                    maxlength="6"
+                    required
+                  />
+                </div>
+                <div class="form-submit-container">
+                  <button class="join-room-btn btn">Join</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section class="welcome-message rounded">
+          <h2 class="text-lg">Welcome!</h2>
+          <p>
+            Here you can watch youtube videos in a group. <br /><br />
+            Create a room and invite your friends by sending them the room code.
+            <br /><br />
+            You can chat with your friends and watch videos by pasting the video
+            url in the search bar.
+          </p>
+        </section>
+      </div>
+
+      <div class="room page-content" data-pathname="/room">
+        <div class="room-content active" data-state="0">
+          <div class="room-loader">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="room-content" data-state="1">
+          <div class="room-main">
+            <section class="video">
+              <h2 class="sr-only">Video</h2>
+              <div class="search-container">
+                <form class="search-bar" name="search">
+                  <label class="sr-only" for="search-input">Search: </label>
+                  <input
+                    class="search-input rounded-left"
+                    id="search-input"
+                    name="url"
+                    type="search"
+                  /><button
+                    class="search-btn rounded-right"
+                    aria-label="Search for a video"
+                  >
+                    <svg
+                      class="magnifying-glass"
+                      aria-hidden="true"
+                      focusable="false"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 512 512"
+                    >
+                      <title>Search</title>
+                      <path
+                        d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </button>
+                </form>
+                <div class="invalid-url" role="alert" hidden>Invalid URL.</div>
+              </div>
+              <div class="aspect-ratio-16-9">
+                <div class="player" id="player"></div>
+              </div>
+            </section>
+
+            <section class="chat rounded">
+              <h2 class="sr-only">Chat</h2>
+              <div class="chat-header">
+                <button class="user-list-btn" aria-label="Show user list">
+                  <svg
+                    class="user-icon"
+                    aria-hidden="true"
+                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <title>Users</title>
+                    <path
+                      d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="chat-body">
+                <div class="user-list-container">
+                  <div class="user-list-header">Users</div>
+                  <ul class="user-list"></ul>
+                </div>
+                <ul class="message-list"></ul>
+              </div>
+              <form class="message-bar" name="chat">
+                <label class="sr-only" for="message-textarea">Message: </label>
+                <textarea
+                  class="message-textarea rounded-left"
+                  id="message-textarea"
+                  name="message"
+                ></textarea>
+                <button
+                  class="message-btn rounded-right"
+                  aria-label="Send message"
+                >
+                  <svg
+                    class="paper-plane"
+                    aria-hidden="true"
+                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M511.6 36.86l-64 415.1c-1.5 9.734-7.375 18.22-15.97 23.05c-4.844 2.719-10.27 4.097-15.68 4.097c-4.188 0-8.319-.8154-12.29-2.472l-122.6-51.1l-50.86 76.29C226.3 508.5 219.8 512 212.8 512C201.3 512 192 502.7 192 491.2v-96.18c0-7.115 2.372-14.03 6.742-19.64L416 96l-293.7 264.3L19.69 317.5C8.438 312.8 .8125 302.2 .0625 289.1s5.469-23.72 16.06-29.77l448-255.1c10.69-6.109 23.88-5.547 34 1.406S513.5 24.72 511.6 36.86z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </form>
+            </section>
+          </div>
+        </div>
+
+        <div class="room-content" data-state="2">
+          <section class="not-in-room">
+            <h2 class="text-xl font-weight-normal">Not in room.</h2>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

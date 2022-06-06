@@ -1,0 +1,34 @@
+:root {
+  --background: #e6e6e6;
+  --surface: #fff;
+  --foreground: #333;
+  --primary: #354259;
+  --primary-variant: #2c2c2c;
+  --on-primary: #fff;
+  --on-primary-icon: #aaa;
+  --border: #ccc;
+  --outline: #80bdff;
+  --icon: #666;
+  --icon-hover: #000;
+  --form-focus: #80bdff;
+}
+
+:root[data-theme="dark"] {
+  --background: #262626;
+  --surface: #333;
+  --foreground: #eee;
+  --primary: #1f1f1f;
+  --primary-variant: #111;
+  --on-primary: #fff;
+  --on-primary-icon: #aaa;
+  --border: #1b1b1b;
+  --outline: #80bdff;
+  --icon: #aaa;
+  --icon-hover: #fff;
+  --form-focus: #80bdff;
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+}

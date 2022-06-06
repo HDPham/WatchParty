@@ -1,0 +1,36 @@
+.btn {
+  display: inline-block;
+  min-width: 5rem;
+  height: 2.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  color: var(--on-primary);
+  background-color: var(--primary);
+  border: 0.1rem solid var(--border);
+  border-radius: 0.25rem;
+
+  &:hover {
+    scale: 1.05;
+  }
+
+  &:focus-visible {
+    outline: var(--outline) solid 0.1rem;
+  }
+
+  &[disabled] {
+    scale: 1;
+  }
+}
+
+.leave-btn {
+  padding: 0.5rem;
+  color: var(--on-primary);
+  text-decoration: none;
+  border-radius: 0.25rem;
+  transition-duration: 0.2s;
+  transition-property: background-color;
+
+  &:hover {
+    background-color: var(--primary-variant);
+  }
+}
