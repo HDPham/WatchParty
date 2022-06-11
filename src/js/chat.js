@@ -1,6 +1,6 @@
 import socket from './socket';
 
-function addMessageToDOM(message) {
+function createMessageElement(message) {
   const messageElement = document.createElement('li');
 
   messageElement.classList.add('message', 'font-weight-bold');
@@ -9,7 +9,7 @@ function addMessageToDOM(message) {
     : message.text;
   messageElement.classList.add(message.from ? 'from-user' : 'from-server');
 
-  document.querySelector('.message-list').append(messageElement);
+  return messageElement;
 }
 
 function handleChatFormSubmit(event) {
@@ -38,8 +38,21 @@ function handleMessageTextareaKeyDown(event) {
   }
 }
 
-socket.on('messages', (messages) => messages.forEach(addMessageToDOM));
+socket.on('messages', (messages) => {
+  const fragment = new DocumentFragment();
+  const messageList = document.querySelector('.message-list');
 
-socket.on('message', (message) => addMessageToDOM(message));
+  messages.forEach((message) => {
+    const messageElement = createMessageElement(message);
+    fragment.append(messageElement);
+  });
+  messageList.append(fragment);
+});
+
+socket.on('message', (message) => {
+  const messageElement = createMessageElement(message);
+  const messageList = document.querySelector('.message-list');
+  messageList.append(messageElement);
+});
 
 export { handleChatFormSubmit, handleMessageTextareaKeyDown };
