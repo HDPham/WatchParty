@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('dist'));
-  app.get('*', (req, res) => {
+  app.get(['/', '/room'], (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
   });
 }
