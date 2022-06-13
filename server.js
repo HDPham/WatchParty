@@ -1,3 +1,4 @@
+const path = require('path');
 const http = require('http');
 const express = require('express');
 const { Server } = require('socket.io');
@@ -24,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('dist'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+  });
 }
 
 function createRoom(id, socket) {
